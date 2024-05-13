@@ -19,5 +19,5 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s: #Create a new socke
             data = conn.recv(1024) #receives the data from the client
             if not data:
                 break #breaks out once no more data to receive
-            conn.sendall(data) #send the data back to the client (echo it back). The socket must be connected to a remote
+            conn.sendall(str((int(data) + 100)).encode()) #send the data back to the client (echo it back). The socket must be connected to a remote
             #socket (client's socket).
