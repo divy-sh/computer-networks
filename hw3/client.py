@@ -7,8 +7,9 @@ PORT = 65432 #The port used by the server
 
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s: #Create a new socket using teh given address famiily, socket
     #type and protocol number
+    x = str(input())
     s.connect((HOST, PORT)) #Connect to a remote socket at the address and port
-    s.sendall(b"29") #Send data to the socket. The socket must be connected to a remote socket. Data type
+    s.sendall(bytes(x)) #Send data to the socket. The socket must be connected to a remote socket. Data type
     #is byte
     data = s.recv(1024) #Receive data from the socket. The return type is a bytes object representing the data received.
     #The maximum amount of data to be received in each chunk is 1024 as specified.
