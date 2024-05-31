@@ -3,11 +3,12 @@ import http.client
 import sys
 
 def get_resource(resource):
-    '''
-    Insert your code here.    
-
-
-    '''
+    conn = http.client.HTTPConnection("localhost", 8070)
+    conn.request("GET", f"/{resource}")
+    response = conn.getresponse()
+    status_code = response.status
+    content_type = response.headers.get("Content-type")
+    content = response.read().decode()
 
     print(f"Response Status Code: {status_code}")
     print(f"Content Type: {content_type}")

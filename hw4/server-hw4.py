@@ -6,31 +6,36 @@ import mimetypes
 class MyHandler(SimpleHTTPRequestHandler):
     def do_GET(self):
         # Serve HTML or JSON content based on the requested resource
-        if '''Insert your code here'''== "text/html":
+        content_type, _ = mimetypes.guess_type(self.path)
+        if content_type == "text/html":
             try:
-                '''
-                Insert your code here.    
-
-
-                '''                  
+                # Open and serve the requested HTML file
+                with open(self.path[1:], 'rb') as file:
+                    self.send_response(200)
+                    self.send_header('Content-type', content_type)
+                    self.end_headers()
+                    self.wfile.write(file.read())
             except FileNotFoundError:
-                '''Insert your code here'''
-        elif '''Insert your code here''' == "application/json":
+                # Handle file not found error
+                self.send_error(404, f"File Not Found: {self.path[1:]}")
+        elif content_type == "application/json":
             try:
-                '''
-                Insert your code here.    
-
-
-                ''' 
+                # Open and serve the requested JSON file
+                with open(self.path[1:], 'rb') as file:
+                    self.send_response(200)
+                    self.send_header('Content-type', content_type)
+                    self.end_headers()
+                    self.wfile.write(file.read())
             except FileNotFoundError:
-                '''Insert your code here'''
+                # Handle file not found error
+                self.send_error(404, f"File Not Found: {self.path[1:]}")
         else:
             # Handle unsupported content type
-            '''
-            Insert your code here.    
+            self.send_response(404)
+            self.send_header('Content-type', content_type)
+            self.end_headers()
+            self.wfile.write(b'Unsupported Content Type')
 
-
-            ''' 
 # Server setup
 port = 8070
 server_address = ('', port)
