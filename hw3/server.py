@@ -1,4 +1,4 @@
-#author - Divyendu Shekhar
+# Divyendu Shekhar
 #A simple program that will create a server that would echo a client request back to the client
 
 import socket

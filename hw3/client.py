@@ -1,4 +1,4 @@
-#author - Divyendu Shekhar
+# Divyendu Shekhar
 #Client program to send data to a server via a socket, and then have that same data echoed back.
 import socket
 
