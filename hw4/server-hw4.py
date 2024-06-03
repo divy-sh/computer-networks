@@ -10,31 +10,31 @@ class MyHandler(SimpleHTTPRequestHandler):
         if content_type == "text/html":
             try:
                 # Open and serve the requested HTML file
-                with open(self.path[1:], 'rb') as file:
+                with open(self.path, 'rb') as file:
                     self.send_response(200)
                     self.send_header('Content-type', content_type)
                     self.end_headers()
                     self.wfile.write(file.read())
             except FileNotFoundError:
                 # Handle file not found error
-                self.send_error(404, f"File Not Found: {self.path[1:]}")
+                self.send_error(404, f"File Not Found: {self.path}")
         elif content_type == "application/json":
             try:
                 # Open and serve the requested JSON file
-                with open(self.path[1:], 'rb') as file:
+                with open(self.path, 'rb') as file:
                     self.send_response(200)
                     self.send_header('Content-type', content_type)
                     self.end_headers()
                     self.wfile.write(file.read())
             except FileNotFoundError:
                 # Handle file not found error
-                self.send_error(404, f"File Not Found: {self.path[1:]}")
+                self.send_error(404, f"File Not Found: {self.path}")
         else:
             # Handle unsupported content type
             self.send_response(404)
             self.send_header('Content-type', content_type)
             self.end_headers()
-            self.wfile.write(b'Unsupported Content Type')
+            self.wfile.write(b'404 Not Found - Unsupported Content Type')
 
 # Server setup
 port = 8070
