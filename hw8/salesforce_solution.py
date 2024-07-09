@@ -12,7 +12,7 @@ def get_access_token():
         'client_id': config['OAUTH']['client_id'],
         'client_secret': config['OAUTH']['client_secret'],
         'username': config['OAUTH']['username'],
-        'password': config['OAUTH']['password']
+        'password': config['OAUTH']['password'] + config['OAUTH']['security_token']
     }
     response = requests.request("POST", url, data=payload)
     json_response = response.json()
